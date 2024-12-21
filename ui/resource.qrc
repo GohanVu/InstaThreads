@@ -1,0 +1,50 @@
+<RCC>
+  <qresource prefix="img">
+    <file>loginForm.png</file>
+  </qresource>
+  <qresource prefix="account">
+    <file>filterIcon.png</file>
+    <file>addAcc.png</file>
+    <file>addmoreAcc.png</file>
+  </qresource>
+  <qresource prefix="background">
+    <file>threadsBackground.jpg</file>
+    <file>InstaBackground.jpg</file>
+  </qresource>
+  <qresource prefix="photos">
+    <file>instagradientsquare.png</file>
+    <file>instaThreads.png</file>
+    <file>switchinsta.png</file>
+    <file>switchthreads.png</file>
+  </qresource>
+  <qresource prefix="iconSidebar">
+    <file>homePageSidebar.png</file>
+    <file>uploadSidebar.png</file>
+    <file>switchBtn.png</file>
+  </qresource>
+  <qresource prefix="profile">
+    <file>profile.png</file>
+  </qresource>
+  <qresource prefix="browser">
+    <file>chrome.png</file>
+    <file>firefox.png</file>
+  </qresource>
+  <qresource prefix="project">
+    <file>addBtn.png</file>
+    <file>deleteProjectBtn.png</file>
+    <file>editProjectBtn.png</file>
+    <file>resetProjectBtn.png</file>
+  </qresource>
+  <qresource prefix="logoHomepage">
+    <file>instaThreads.png</file>
+  </qresource>
+  <qresource prefix="iconshortcut">
+    <file>IconShortcut.png</file>
+    <file>IconShortcut.ico</file>
+  </qresource>
+  <qresource prefix="iconBtn">
+    <file>scaleUpBtn.png</file>
+    <file>closeBtn.png</file>
+    <file>minimizeBtn.png</file>
+  </qresource>
+</RCC>
