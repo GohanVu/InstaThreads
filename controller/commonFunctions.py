@@ -38,12 +38,9 @@ def pushYNQuestion(msg):
     msg_box.setWindowTitle("Thông báo")
     msg_box.setText(msg)
     msg_box.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
-
-    # Set the icon of the dialog
     msg_box.setWindowIcon(QIcon(":/iconshortcut/IconShortcut.png"))
 
     button_reply = msg_box.exec()
-
     if button_reply == QMessageBox.StandardButton.Yes:
         return True
     else:

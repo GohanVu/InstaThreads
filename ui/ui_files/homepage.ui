@@ -115,9 +115,11 @@ background:transparent
 
 QPushButton:hover
 {
-    border: 0px solid #747d8c;
-    color: black;
-    background-color: #bbbbbb;
+      border: 0px solid #747d8c;  
+    color: black; /* Màu chữ khi hover */  
+    background-color: #d5d4d4; /* Màu nền khi hover */  
+	border-radius : 4px
+   
 }
 </string>
             </property>
@@ -144,6 +146,14 @@ background : transparent;
 border : 0;
 padding : 0;
 color: black
+}
+QPushButton:hover
+{
+      border: 0px solid #747d8c;  
+    color: black; /* Màu chữ khi hover */  
+    background-color: #d5d4d4; /* Màu nền khi hover */  
+	border-radius : 4px
+   
 }</string>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -474,7 +484,18 @@ border: 0</string>
              <string notr="true">QPushButton {
 background: transparent;
 border : 0
-}</string>
+}
+QPushButton:hover
+{
+    border: 0px solid #747d8c;  
+    color: black; /* Màu chữ khi hover */  
+    background-color: #bbbbbb; /* Màu nền khi hover */  
+	border-radius : 4px 
+}
+
+#closeBtnProj:hover { 
+    background-color: #ff4800  /* Màu nền khi hover cho nút closeBtnProj */  
+}  </string>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_6">
              <property name="spacing">

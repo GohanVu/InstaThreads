@@ -68,9 +68,11 @@ class Ui_MainWindow(object):
 "\n"
 "QPushButton:hover\n"
 "{\n"
-"    border: 0px solid #747d8c;\n"
-"    color: black;\n"
-"    background-color: #bbbbbb;\n"
+"      border: 0px solid #747d8c;  \n"
+"    color: black; /* Màu chữ khi hover */  \n"
+"    background-color: #d5d4d4; /* Màu nền khi hover */  \n"
+"    border-radius : 4px\n"
+"   \n"
 "}\n"
 "")
         self.toggleSidebarBtn.setText("")
@@ -86,6 +88,14 @@ class Ui_MainWindow(object):
 "border : 0;\n"
 "padding : 0;\n"
 "color: black\n"
+"}\n"
+"QPushButton:hover\n"
+"{\n"
+"      border: 0px solid #747d8c;  \n"
+"    color: black; /* Màu chữ khi hover */  \n"
+"    background-color: #d5d4d4; /* Màu nền khi hover */  \n"
+"    border-radius : 4px\n"
+"   \n"
 "}")
         self.projectOptions.setObjectName("projectOptions")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.projectOptions)
@@ -201,7 +211,18 @@ class Ui_MainWindow(object):
         self.horizontalWidget_4.setStyleSheet("QPushButton {\n"
 "background: transparent;\n"
 "border : 0\n"
-"}")
+"}\n"
+"QPushButton:hover\n"
+"{\n"
+"    border: 0px solid #747d8c;  \n"
+"    color: black; /* Màu chữ khi hover */  \n"
+"    background-color: #bbbbbb; /* Màu nền khi hover */  \n"
+"    border-radius : 4px \n"
+"}\n"
+"\n"
+"#closeBtnProj:hover { \n"
+"    background-color: #ff4800  /* Màu nền khi hover cho nút closeBtnProj */  \n"
+"}  ")
         self.horizontalWidget_4.setObjectName("horizontalWidget_4")
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.horizontalWidget_4)
         self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)

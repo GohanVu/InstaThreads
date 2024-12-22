@@ -22,6 +22,9 @@ class HomePage(QMainWindow):
         asyncio.run(self.setupDatabase())  # Thiết lập cơ sở dữ liệu 
         self.setWindowFlag(Qt.WindowType.FramelessWindowHint)  # Thiết lập cửa sổ không có khung
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)  # Thiết lập nền trong suốt
+        self.ui.minimizeBtnProj.clicked.connect(self.showMinimized)
+        self.ui.scaleBtnProj.clicked.connect(self.toggleMaximizeRestore)
+        self.ui.closeBtnProj.clicked.connect(self.confirmClose)
         self.setupBtn()  # Thiết lập các nút dự án (Trên cùng homepage)
         self.setupSidebar()  # Thiết lập setup thanh bên
         self.setupMainContent()
@@ -347,7 +350,7 @@ class HomePage(QMainWindow):
 
 
 
-    # Việc di chuyển cửa sổ----------------------------------
+    # Hàm di chuyển cửa sổ----------------------------------
     def mousePressEvent(self, event): #Hàm  khi người dùng nhấn chuột
         if event.button() == Qt.MouseButton.LeftButton: #Kiểm tra nếu nhấn chuột trái
             self.moveFlag = True #Đặt trạng thái di chuyển là true
@@ -364,3 +367,40 @@ class HomePage(QMainWindow):
 
     def mouseReleaseEvent(self, QMouseEvent): #Hàm khi người dùng nhả chuột
         self.moveFlag = False #Đặt trạng thái di chuyển là false
+
+# Hàm mở to thu nhỏ cửa sổ----------------------------------
+    def toggleMaximizeRestore(self):
+        if self.isMaximized():
+            self.showNormal()
+        else:
+            self.showMaximized()
+    
+# Hàm xác nhận đóng cửa sổ----------------------------------
+    def confirmClose(self):
+        dialog = QDialog(self)
+        dialog.setWindowIcon(QIcon(":/iconshortcut/IconShortcut.png"))
+        dialog.setWindowTitle("Xác nhận đóng")
+        dialog.setWindowModality(Qt.WindowModality.ApplicationModal)
+        dialog.setFixedSize(300, 150)   
+
+        layout = QVBoxLayout()
+
+        label = QLabel("Đảm bảo đã lưu công việc.")
+        layout.addWidget(label)
+
+        button_layout = QHBoxLayout()
+
+        confirm_button = QPushButton("Confirm")
+        confirm_button.setCursor(Qt.CursorShape.PointingHandCursor)
+        confirm_button.clicked.connect(lambda: (dialog.accept(), self.close(),QApplication.quit()))
+        button_layout.addWidget(confirm_button)
+
+        cancel_button = QPushButton("Cancel")
+        cancel_button.setCursor(Qt.CursorShape.PointingHandCursor)
+        cancel_button.clicked.connect(dialog.reject)
+        button_layout.addWidget(cancel_button)
+
+        layout.addLayout(button_layout)
+        dialog.setLayout(layout)
+        dialog.exec()
+
