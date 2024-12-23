@@ -1,0 +1,57 @@
+### 1. Khởi tạo và Cấu hình
+- setupDatabase: source/homePage.py - Thiết lập cơ sở dữ liệu, tạo bảng nếu chưa tồn tại.
+- setupBtn: source/homePage.py - Thiết lập các nút liên quan đến dự án trên giao diện chính.
+- setupSidebar: source/homePage.py - Thiết lập thanh bên sidebar.
+- setupMainContent: source/homePage.py - Thiết lập nội dung chính của giao diện.
+- setupLastLocation: source/loginForm.py - Thiết lập vị trí đăng nhập cuối cùng (nút nhớ đăng nhập)
+
+### 2. Quản lý Dự án
+- addProject: source/homePage.py - Thêm dự án mới.
+- editProject: source/homePage.py - Chỉnh sửa dự án hiện tại.
+- deleteProject: source/homePage.py - Xóa dự án hiện tại.
+- checkExitsProject: source/homePage.py - Kiểm tra tên dự án có tồn tại không.
+- getProjectId: source/homePage.py - Lấy ID của dự án hiện tại.
+- loadProject: source/homePage.py - Tải danh sách dự án vào combobox.
+
+### 3. Quản lý Tài khoản
+- addAcc: source/homePage.py - Thêm tài khoản mới.
+- applyAccBtn: source/crudAccForm.py - Áp dụng thông tin tài khoản từ form CRUD.
+- updateIDFromTiktokServer: source/tableProfiles.py - Cập nhật ID từ máy chủ Tiktok.
+- setCookieToUore: source/tableProfiles.py - Thiết lập cookie cho một tài khoản cụ thể.
+- bulkRefingerprint: source/tableProfiles.py - Thực hiện refingerprint hàng loạt cho các nền tảng được chọn.
+- reFingerprintThisAccount: source/tableProfiles.py - Refingerprint một tài khoản cụ thể.
+- moveAllToTotal: source/tableProfiles.py - Di chuyển tất cả tài khoản vào tổng.
+- setMusicBypass: source/tableProfiles.py - Thiết lập danh sách nhạc bypass cho tài khoản.
+
+### 4. Giao diện Người dùng
+- mousePressEvent: source/homePage.py - Xử lý sự kiện nhấn chuột để di chuyển cửa sổ.
+- mouseMoveEvent: source/homePage.py - Xử lý sự kiện di chuyển chuột để di chuyển cửa sổ.
+- mouseReleaseEvent: source/homePage.py - Xử lý sự kiện nhả chuột để dừng di chuyển cửa sổ.
+- toggleMaximizeRestore: source/homePage.py - Chuyển đổi giữa phóng to và thu nhỏ cửa sổ.
+- confirmClose: source/homePage.py - Xác nhận trước khi đóng cửa sổ.
+- paintEvent: source/switch_button.py - Vẽ giao diện cho nút chuyển đổi.
+
+### 5. Xử lý Đăng nhập
+- login: source/loginForm.py - Xử lý sự kiện đăng nhập.
+
+### 6. Cơ sở Dữ liệu
+- execute_query: controller/DBF.py - Thực thi truy vấn SQL với cơ chế retry khi gặp lỗi "database is locked".
+- execute_read: controller/DBF.py - Thực thi truy vấn đọc (SELECT) mà không cần commit.
+- execute_write: controller/DBF.py - Thực thi truy vấn ghi (INSERT, UPDATE, DELETE) và cần commit.
+- update_db: controller/DBF.py - Thực thi truy vấn UPDATE.
+- insert_db: controller/DBF.py - Thực thi truy vấn INSERT và trả về ID của dòng vừa chèn.
+- fetch_one: controller/DBF.py - Thực thi truy vấn SELECT và trả về một dòng kết quả.
+- fetch_all: controller/DBF.py - Thực thi truy vấn SELECT và trả về tất cả các dòng kết quả.
+
+### 7. Tiện ích
+- hash_string: controller/commonFunctions.py - Băm chuỗi đầu vào bằng SHA-256.
+- unhash_string: controller/commonFunctions.py - Không thể thực hiện đảo ngược băm.
+- pushNotification: controller/commonFunctions.py - Hiển thị thông báo cho người dùng.
+- pushYNQuestion: controller/commonFunctions.py - Hiển thị câu hỏi Yes/No cho người dùng.
+- checkAndCreateLastLocation: controller/commonFunctions.py - Kiểm tra và tạo thư mục vị trí cuối cùng nếu chưa tồn tại.
+- download_image: source/tableProfiles.py - Tải ảnh từ URL và lưu vào đường dẫn chỉ định.
+- contextMenuEvent: source/tableProfiles.py - Xử lý sự kiện menu ngữ cảnh cho widget bảng.
+
+### 8. Khác
+- insertContentHeadlines: source/homePage.py - Thêm các cột trong tablewidget (contentHeadlines).
+- getLocFolder: source/tableProfiles.py - Lấy thư mục vị trí.

@@ -6,7 +6,7 @@ from PyQt6.QtCore import *
 import hashlib  
 
 
-
+# Hàm băm chuỗi
 def hash_string(input_string):  
     """Hàm băm chuỗi đầu vào."""  
     # Sử dụng SHA-256 để băm chuỗi  

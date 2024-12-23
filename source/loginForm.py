@@ -15,6 +15,8 @@ dataLogin = {
 class LoginForm(QMainWindow):  # Định nghĩa lớp LoginForm kế thừa từ QMainWindow
     def __init__(self):  # Hàm khởi tạo
         super().__init__()  # Gọi hàm khởi tạo của lớp cha
+
+        
         self.ui = loginForm_ui.Ui_MainWindow()  # Tạo đối tượng giao diện
         self.ui.setupUi(self)  # Thiết lập giao diện
         self.setWindowFlag(Qt.WindowType.FramelessWindowHint)  # Thiết lập cửa sổ không có khung

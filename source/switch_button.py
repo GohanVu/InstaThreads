@@ -2,6 +2,8 @@ from PyQt6.QtWidgets import QWidget
 from PyQt6.QtGui import QPainter, QPixmap, QColor, QFont, QPainterPath, QBrush, QPen
 from PyQt6.QtCore import QSize, QRectF, QPropertyAnimation, pyqtProperty, Qt
 
+from controller.constantTemplate import INSTAGRAM_MODE, THREADS_MODE
+
 class SwitchButton(QWidget):
     def __init__(self, homePage=None,ui=None):
         super().__init__()
@@ -9,7 +11,7 @@ class SwitchButton(QWidget):
         self.setFixedSize(QSize(153, 30))
         self._checked = False
         self.homePage = homePage
-      
+        
         self._background_color = QColor(0, 0, 0)
         self.knob_color = QColor(255, 255, 255)
         self._knob_pos = QRectF(0, 0, 30, 30)
@@ -37,13 +39,13 @@ class SwitchButton(QWidget):
         self._checked = checked
         if self._checked:
             print('threads')
-            self.homePage.setUpTheme(1)
+            self.homePage.setUpTheme(THREADS_MODE)
             self._background_color = QColor(0, 0, 0)
             self.animation.setStartValue(QRectF(0, 0, 30, 30))
             self.animation.setEndValue(QRectF(123, 0, 30, 30))
         else:
             print('instagram')
-            self.homePage.setUpTheme(0)
+            self.homePage.setUpTheme(INSTAGRAM_MODE)
             self._background_color = QColor(255, 0, 0)
             self.animation.setStartValue(QRectF(123, 0, 30, 30))
             self.animation.setEndValue(QRectF(0, 0, 30, 30))

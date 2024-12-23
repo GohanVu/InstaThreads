@@ -10,14 +10,14 @@ class TableProfiles(QTableWidget):
     def __init__(self, homePage):
         super().__init__()
         self.homePage = homePage
-        self.setShowGrid(False)
-        self.setAlternatingRowColors(True)
+        self.setShowGrid(False) #Ẩn lưới của bảng
+        self.setAlternatingRowColors(True) #Đặt màu xen kẽ các hàng
 
-
-        header_labels = asyncio.run(self.fetch_content_attributes())
+        # Lấy nội dung của các cột từ cơ sở dữ liệu
+        header_labels = asyncio.run(self.fetch_content_headlines())
         # self.setHorizontalHeaderLabels(header_labels)
-        self.hashed_position = {}
-        name_column = []
+        self.hashed_position = {} #Tạo một từ điển để lưu trữ vị trí của các cột đã băm
+        name_column = [] #Tạo một mảng để lưu trữ tên của các cột
         for header in header_labels:
             column_name = header[1]
             hashed_column_name = hash_string(column_name)
@@ -27,7 +27,7 @@ class TableProfiles(QTableWidget):
 
 
         self.setColumnCount(len(header_labels))
-        self.setHorizontalHeaderLabels(name_column)
+        self.setHorizontalHeaderLabels(name_column) 
         self.setStyleSheet("""
             
             QTableWidget{
@@ -127,8 +127,8 @@ class TableProfiles(QTableWidget):
         # print(f"==>> self.unique_arr: {self.unique_arr}")
         self.unique_arr = list(set(selected_rows))       
 
-    async def fetch_content_attributes(self):
-        query = "SELECT * FROM contentAttribute;"
+    async def fetch_content_headlines(self):
+        query = "SELECT * FROM contentHeadlines;"
         db = await Database.get_instance()  # Get the singleton database instance
         async with db.connection.execute(query) as cursor:
             return await cursor.fetchall()

@@ -1,6 +1,7 @@
 import json
 import os
 import sqlite3
+import sys
 from PyQt6.QtWidgets import *  
 from PyQt6.QtGui import *  
 from PyQt6.QtCore import * 
@@ -39,15 +40,50 @@ class HomePage(QMainWindow):
 
         # Nút switch nền tảng (instagram/threads)
         self.switch = SwitchButton(self)
+      
         self.switch.setObjectName('switchBtn')
         self.switch.setCursor(Qt.CursorShape.PointingHandCursor)
         self.ui.switchLayoutBtn.addWidget(self.switch)
+        
 
     # Hàm setup cơ sở dữ liệu----------------------------------
     async def setupDatabase(self): 
-        self.db = await Database.get_instance('./data/coreData.db')  # Lấy kết nối cơ sở dữ liệu duy nhất
         db = await Database.get_instance()  # Lấy kết nối duy nhất
 
+        create_account_table = """
+            CREATE TABLE IF NOT EXISTS accountTable (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name_profile TEXT NULL,
+                email TEXT UNIQUE,
+                email_password TEXT,
+                password TEXT NULL,
+                auth_fa TEXT NULL,
+                username_insta TEXT NULL,
+                usernam_threads TEXT NULL,
+                proxy TEXT NULL,
+                proxy_type TEXT NULL DEFAULT 'http',
+                is_logged_insta INTEGER DEFAULT 0,
+                is_logged_thread INTEGER DEFAULT 0,
+                timezone_proxy TEXT NULL,
+                user_agent TEXT NULL,
+                longitude TEXT NULL,
+                latitude TEXT NULL,
+                project_id INTEGER,
+                id_browser INTEGER UNIQUE,
+                avt_path_threads TEXT,
+                avt_path_insta TEXT,
+                cookie_threads TEXT,
+                cookie_insta TEXT,
+                note TEXT,
+                folder_upload_path TEXT,
+                view_total_insta INTEGER,
+                follower_insta INTEGER,
+                view_total_threads INTEGER,
+                follower_threads INTEGER,
+                last_actived TEXT
+            );
+            """
+        await db.execute_write(create_account_table)
     # Tạo bảng projectTable nếu chưa tồn tại
         create_table_project = """
         CREATE TABLE IF NOT EXISTS projectTable (
@@ -90,10 +126,10 @@ class HomePage(QMainWindow):
         """
         await db.execute_write(create_table_content_headlines) 
 
-    # Thêm các cột trong tablewidget (contentAttribute)
+    # Thêm các cột trong tablewidget (contentHeadlines)
         for name_column in CONTENT_ATTRIBUTE_LIST:
             try:
-                await self.insertContentAttribute(name_column) #Thêm cột
+                await self.insertContentHeadlines(name_column) #Thêm cột
             except sqlite3.IntegrityError: #Nếu có lỗi
                 pass #Bỏ qua lỗi
             
@@ -101,7 +137,7 @@ class HomePage(QMainWindow):
     
     # Hàm setup chủ đề (Instagram hoặc Threads)----------------------------------
     def setUpTheme(self, mode = INSTAGRAM_MODE):
-        self.mode = mode
+        self.modecccc = mode
            
         if mode == INSTAGRAM_MODE:
             self.ui.body.setStyleSheet("""
@@ -194,8 +230,10 @@ class HomePage(QMainWindow):
 
     # Hàm thêm tài khoản----------------------------------
     def addAcc(self):
-        self.crudAccForm = CrudAccForm()
+        self.crudAccForm = CrudAccForm(self)
         self.crudAccForm.show()
+        
+    
 
 
     # Hàm thêm dự án----------------------------------
@@ -328,10 +366,11 @@ class HomePage(QMainWindow):
             self.ui.projectCombobox.addItem(project_name, project_id)  # Thêm tên dự án và ID vào combobox
 
 
-    # Hàm thêm các cột trong tablewidget (contentAttribute)----------------------------------
-    async def insertContentAttribute(self, name_column):
+    # Hàm thêm các cột trong tablewidget (contentHeadlines)----------------------------------
+    async def insertContentHeadlines(self, name_column):
+        db = await Database.get_instance()
         # Fetch the current maximum value of positon_column
-        max_position_query = "SELECT MAX(positon_column) FROM contentAttribute;"
+        max_position_query = "SELECT MAX(positon_column) FROM contentHeadlines;"
         max_position_result = await fetch_one(max_position_query)
         
         # Ensure max_position_result is not None and extract the value
@@ -342,10 +381,10 @@ class HomePage(QMainWindow):
 
         # Insert the new row with the calculated position
         insert_query = f"""
-        INSERT INTO contentAttribute (name_column, positon_column)
+        INSERT INTO contentHeadlines (name_column, positon_column)
         VALUES ('{name_column}', {new_position});
         """
-        await self.db.execute_write(insert_query) 
+        await db.execute_write(insert_query) 
 
 
 
@@ -392,7 +431,7 @@ class HomePage(QMainWindow):
 
         confirm_button = QPushButton("Confirm")
         confirm_button.setCursor(Qt.CursorShape.PointingHandCursor)
-        confirm_button.clicked.connect(lambda: (dialog.accept(), self.close(),QApplication.quit()))
+        confirm_button.clicked.connect(self.close)
         button_layout.addWidget(confirm_button)
 
         cancel_button = QPushButton("Cancel")
@@ -403,4 +442,11 @@ class HomePage(QMainWindow):
         layout.addLayout(button_layout)
         dialog.setLayout(layout)
         dialog.exec()
+
+    def closeEvent(self, event):
+        # self.close()
+        QApplication.quit()
+        print("Ham duoc goi trong event close")
+        event.accept()
+        # sys.exit(0)
 
